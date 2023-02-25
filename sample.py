@@ -8,8 +8,12 @@ class Product():
         self.tax = tax
 
 
+class Calculate():
+    def __init__(self,product_list,location=0):
+        self.product_list = product_list
+        self.location = location
+    
     def get_shipping(self):
-
         #postcodes
         city = range(300,400)
         near_city = range(200,500)
@@ -22,24 +26,31 @@ class Product():
             shipping = 1000
         else:
             shipping = 2000 
-        
-        #weight in KG
-        small = range(0,1.5)
-        medium = range(1.5,3)
-        large = range(3,5)
-        if self.weight in small:
-            shipping *= 1.1
-        elif self.weight in medium:
-            shipping *= 1.2
-        elif self.weight in large:
-            shipping *= 1.3
-        else:
-            shipping *= 1.5
         return shipping
-
-
-    def get_price(self):
+    
+    def get_total(self):
+        total_sum = 0
         shipping = self.get_shipping()
-        return (self.price + self.tax + shipping)*self.quantity
-    
-    
+        for i in self.product_list:
+            #weight in KG
+            small = range(0,2)
+            medium = range(2,3)
+            large = range(3,5)
+            if i.weight in small:
+                shipping *= 1.1
+            elif i.weight in medium:
+                shipping *= 1.2
+            elif i.weight in large:
+                shipping *= 1.3
+            else:
+                shipping *= 1.5
+            total_sum += (i.price*i.quantity*i.tax) + self.get_shipping()
+        return total_sum
+
+item1 = Product("iPad", 50000, 1, 50,0.24)
+item2 = Product("iPhone",100000, 0.5, 40,0.24)
+item3 = Product("MacBook",300000, 2, 100,0.24)
+product_list1 = [item1,item2,item3]
+location = 300
+print(Calculate(product_list1,location).get_total())
+
