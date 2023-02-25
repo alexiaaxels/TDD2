@@ -1,5 +1,5 @@
 class Product():
-    def __init__(self,item,price,weight,quantity,tax = None):  # afh stendur að það eigi að taka in location til að finna út hvað skatturinn er mikill
+    def __init__(self,item,price,weight,quantity,tax = 0.25):  # afh stendur að það eigi að taka in location til að finna út hvað skatturinn er mikill
         # en svo er beðið um tax input????? ?? ? ? ?? ? ? ?? ? ? ? ?? ? ? ?? ?? ? ? ? ? ? ? ?? ? ??
         self.item = item
         self.price = price
@@ -46,11 +46,4 @@ class Calculate():
                 shipping *= 1.5
             total_sum += (i.price*i.quantity*i.tax) + self.get_shipping()
         return total_sum
-
-item1 = Product("iPad", 50000, 1, 50,0.24)
-item2 = Product("iPhone",100000, 0.5, 40,0.24)
-item3 = Product("MacBook",300000, 2, 100,0.24)
-product_list1 = [item1,item2,item3]
-location = 300
-print(Calculate(product_list1,location).get_total())
 
