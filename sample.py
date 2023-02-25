@@ -7,5 +7,3 @@ class Product():
         self.quantity = quantity
         self.tax = tax
 
-    def get_price(self):
-        return (self.price + self.tax + self.shipping)*self.quantity
