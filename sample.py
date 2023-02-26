@@ -44,6 +44,8 @@ class Calculate():
                 shipping *= 1.3
             else:
                 shipping *= 1.5
-            total_sum += (i.price*i.quantity*i.tax) + self.get_shipping()
+            if i.tax == 0:
+                total_sum += i.price*i.quantity + self.get_shipping()
+            else:
+                total_sum += (i.price*i.quantity*i.tax) + self.get_shipping()
         return total_sum
-
